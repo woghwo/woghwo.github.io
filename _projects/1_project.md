@@ -11,19 +11,20 @@ category: work
 
 {% include figure.liquid loading="eager" path="assets/img/proj1_demo.png" title="Project Demo" class="img-fluid rounded z-depth-1" %}
 
-## 프로젝트 개요
 <br/>
+## 프로젝트 개요
 
 자율주행 환경에서 카메라와 LiDAR 데이터를 활용하여 객체를 탐지하고, 객체와의 거리를 기반으로 실시간 위험도를 계산하여 알리는 ADAS 시스템
 데이터 전처리 자동화부터 모델 학습, 그리고 안정적인 거리 추정을 위한 하이브리드 알고리즘 구현을 담당함
 
 * **GitHub:** [https://github.com/woghwo/ADAS_SESAC](https://github.com/woghwo/ADAS_SESAC)
 * **주요 기술:** Python, PyTorch, Detectron2, OpenCV
+<br/>
 
 ---
 
-## 주요 구현 및 문제 해결
 <br/>
+## 주요 구현 및 문제 해결
 
 ### 1. 데이터 파이프라인 및 자동화 (Preprocessing)
 <br/>
@@ -31,6 +32,7 @@ category: work
 * **문제:** 대용량 분할 압축 데이터의 효율적인 관리 필요.
 * **해결:** 분할 압축 해제, 중복 제거, 2D Label/Image 추출, Train/Valid/Test 데이터 셋 분리를 수행하는 **전처리 자동화 스크립트**를 구현하여 협업 효율성을 높임
 
+<br/>
 ### 2. 데이터 불균형 분석 및 모델 최적화
 <br/>
 
@@ -39,6 +41,7 @@ category: work
 * **해결:** 주요 객체 탐지에 집중하기 위해 배경 레이블을 제거하고 재학습을 진행하여 추론 정확도를 정상화
 * **추가 개선:** 실제 영상 추론 시 '사람'에 대한 낮은 성능 확인 → 클래스 비율 분석 결과 사람 레이블이 1% 미만임을 파악하고, 사람 데이터 추가 보완의 필요성을 도출
 
+<br/>
 ### 3. 하이브리드 거리 추정 알고리즘 (Distance Estimation)
 <br/>
 
@@ -48,6 +51,7 @@ category: work
 * **Geometric Calculation:** 카메라 보정(Calibration) 정보와 원근법을 이용해 Bounding Box 크기 기반의 기하학적 거리를 계산.
 * **결과:** 모델 예측값과 기하학적 계산값의 평균을 최종 거리로 사용하여, 영상 데모 시 발생하는 거리 값 튀기(Jittering) 현상을 억제하고 안정성 향상
 
+<br/>
 ### 4. ROI 기반 실시간 위험도 판단 로직
 <br/>
 
@@ -58,9 +62,9 @@ category: work
   1. **Danger:** 객체 영역이 ROI의 30% 이상 침범(끼어들기) 혹은 거리 10m 미만.
   2. **Caution:** 안전거리(30m) 미만 유지 시 (10m ~ 30m).
   3. **Safe:** 그 외 정상 주행 상태.
-
+<br/>
 ---
-
+<br/>
 ## 성과 및 배운 점
 <br/>
 
