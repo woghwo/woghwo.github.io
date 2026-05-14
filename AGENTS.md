@@ -12,44 +12,23 @@ A simple, clean, and responsive Jekyll theme for academics.
 - **Customization & theming?** → [CUSTOMIZE.md](CUSTOMIZE.md)
 - **Quick 5-min start?** → [QUICKSTART.md](QUICKSTART.md)
 
+## Workspace Rules
+
+**CRITICAL**: Always consult and apply the instructions from the files listed in `.gemini\settings.json` when working in this folder.
+
 ## Essential Commands
 
-### Local Development (Docker)
+### Direct Commit & Push Workflow
 
-The recommended approach is using Docker.
+**NO LOCAL BUILDS REQUIRED.** The user prefers a simplified workflow.
+Since only basic content features (portfolio, CV, publications, projects) will be used, you do **NOT** need to run `bundle exec jekyll serve`, `docker compose`, or local builds.
 
-```bash
-# Initial setup & start dev server
-docker compose pull && docker compose up
-# Site runs at http://localhost:8080
+When updating the site:
+1. Edit the relevant markdown, YAML, or BibTeX files (e.g., `_pages/`, `_data/cv.yml`, `_bibliography/papers.bib`, `_projects/`).
+2. Directly commit and push to the `main` branch.
+3. GitHub Actions will automatically build and deploy the changes to GitHub Pages.
 
-# Rebuild after changing dependencies or Dockerfile
-docker compose up --build
-
-# Stop containers and free port 8080
-docker compose down
-```
-
-### Pre-Commit Checklist
-
-Before every commit, you **must** run these steps:
-
-1.  **Format Code:**
-    ```bash
-    # (First time only)
-    npm install --save-dev prettier @shopify/prettier-plugin-liquid
-    # Format all files
-    npx prettier . --write
-    ```
-2.  **Build Locally & Verify:**
-
-    ```bash
-    # Rebuild the site
-    docker compose up --build
-
-    # Verify by visiting http://localhost:8080.
-    # Check navigation, pages, images, and dark mode.
-    ```
+*Note: Code formatting with prettier is optional but recommended if the code gets messy. Do not block commits on local build verification.*
 
 ## Critical Configuration
 
