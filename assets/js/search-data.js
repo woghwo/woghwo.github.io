@@ -496,11 +496,6 @@ ninja.data = [{
           description: "another project with an image 🎉",
           section: "Projects",handler: () => {
               window.location.href = "/projects/9_project/";
-            },},{id: "projects-실시간-객체-탐지-및-거리-기반-위험도-평가-시스템-adas-개발",
-          title: '실시간 객체 탐지 및 거리 기반 위험도 평가 시스템 (ADAS) 개발',
-          description: "",
-          section: "Projects",handler: () => {
-              window.location.href = "/projects/portfolio-1/";
             },},{id: "teachings-data-science-fundamentals",
           title: 'Data Science Fundamentals',
           description: "This course covers the foundational aspects of data science, including data collection, cleaning, analysis, and visualization. Students will learn practical skills for working with real-world datasets.",
