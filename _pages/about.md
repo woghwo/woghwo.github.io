@@ -2,7 +2,7 @@
 layout: about
 title: about
 permalink: /
-subtitle: 중앙대학교 소프트웨어학부
+subtitle: School of Software, Chung-Ang University
 
 profile:
   align: right

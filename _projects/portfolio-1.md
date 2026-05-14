@@ -1,15 +1,12 @@
 ---
-layout: page
 title: "실시간 객체 탐지 및 거리 기반 위험도 평가 시스템 (ADAS) 개발"
-description: "데이터 불균형 해결부터 기하학적 거리 계산 알고리즘을 통한 주행 위험도 분류 시스템 구축"
-img: assets/img/proj1_demo.png
-importance: 1
-category: work
+excerpt: "데이터 불균형 해결부터 기하학적 거리 계산 알고리즘을 통한 주행 위험도 분류 시스템 구축 <br/><img src='/images/demo.png' width='500' height='300'>"
+collection: portfolio
 ---
 
 <br/>
 
-{% include figure.liquid loading="eager" path="assets/img/proj1_demo.png" title="Project Demo" class="img-fluid rounded z-depth-1" %}
+![Project Demo](/images/demo.png)
 
 ## 🚗 프로젝트 개요
 
