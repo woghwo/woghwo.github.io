@@ -5,7 +5,7 @@ date: 2026-05-14 17:30:00 +0900
 categories: paper-review
 tags: [paper-review, E2E]
 description: "Planning-oriented Autonomous Driving"
-thumbnail: assets/img/uniad_pic1.png
+thumbnail: assets/img/uniad_pipeline.png
 ---
 
 
@@ -30,8 +30,10 @@ thumbnail: assets/img/uniad_pic1.png
 <br/>
 
 <img src="{{ '/assets/img/uniad_pic1.png' | relative_url }}" class="img-fluid rounded z-depth-1" alt="Comparison on the various designs">
+<br/>
 
 자율주행 모델에 대한 기존의 접근 방식들은 크게 다음과 같이 분류할 수 있습니다.
+<br/>
 
 ### (a) Standalone Models
 <br/>
@@ -68,11 +70,11 @@ thumbnail: assets/img/uniad_pic1.png
 <br/>
 
 {% include figure.liquid loading="eager" path="assets/img/uniad_pic2.png" title="Tasks comparison and taxonomy" class="img-fluid rounded z-depth-1" %}
+<br/>
 
 Perception과 Prediction 태스크를 명시적으로 고려한 구조이지만, 위 테이블에서 확인할 수 있듯이 각 태스크 내에서의 세밀한(Detailed) 상호작용 및 연결성에 대한 고려가 여전히 부족합니다.
 
 <br/>
-
 **결론적으로 본 논문에서는** 
 최종 목표인 **Planning**을 중심에 두는 **Planning-Oriented** 관점에서, 각 태스크들의 세부적인 상호작용을 통합적으로 반영한 **UniAD**를 제안합니다. 
 
