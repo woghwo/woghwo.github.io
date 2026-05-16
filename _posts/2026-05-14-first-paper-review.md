@@ -5,7 +5,7 @@ date: 2026-05-14 17:30:00 +0900
 categories: paper-review
 tags: [paper-review, E2E]
 description: "Planning-oriented Autonomous Driving"
-thumbnail: assets\img\uniad_pipeline.png
+thumbnail: assets/img/uniad_pic1.png
 ---
 
 
@@ -34,6 +34,8 @@ thumbnail: assets\img\uniad_pipeline.png
 자율주행 모델에 대한 기존의 접근 방식들은 크게 다음과 같이 분류할 수 있습니다.
 
 ### (a) Standalone Models
+<br/>
+
 각 태스크(Perception, Prediction, Planning)마다 개별적인 모델(Network)을 독립적으로 사용하는 방식입니다. 파이프라인 상에서 순차적(Sequential)으로 각 모델의 결과를 전달하며 진행됩니다. 하지만 이러한 방식은 다음과 같은 단점을 가집니다.
 
 - **정보 손실 (Information Loss):** 이전 모듈의 최종 출력(Output)만을 다음 모듈의 입력(Input)으로 사용하므로, 이전 모듈이 추출한 방대한 양의 특징(Feature) 정보들이 전달 과정에서 손실됩니다.
@@ -42,6 +44,8 @@ thumbnail: assets\img\uniad_pipeline.png
 <br/>
 
 ### (b) Multi-Task Learning (MTL)
+<br/>
+
 하나의 네트워크를 공유하면서 여러 개의 Head를 추가하여 다양한 태스크를 동시에 학습하는 방식입니다.
 
 - **장점:** 새로운 태스크나 모듈을 쉽게 확장하여 추가할 수 있습니다.
@@ -50,6 +54,9 @@ thumbnail: assets\img\uniad_pipeline.png
 <br/>
 
 ### (c.1) Vanilla Solution
+
+<br/>
+
 가장 초기의 End-to-End 네트워크 구조로, 센서 데이터로부터 직접적으로 Planning 결과를 예측합니다.
 
 - **단점:** 중간 과정인 Perception과 Prediction에 대한 명시적인 추론 과정이 없기 때문에, 모델의 판단 근거를 알 수 없어 해석 가능성(Interpretability)이 떨어지고 안전성 보장(Safety Guarantee)이 어렵습니다.
@@ -58,7 +65,9 @@ thumbnail: assets\img\uniad_pipeline.png
 
 ### (c.2) Explicit Design
 
-<img src="{{ '/assets/img/uniad_pic2.png' | relative_url }}" class="img-fluid rounded z-depth-1" alt="Tasks comparison and taxonomy">
+<br/>
+
+{% include figure.liquid loading="eager" path="assets/img/uniad_pic2.png" title="Tasks comparison and taxonomy" class="img-fluid rounded z-depth-1" %}
 
 Perception과 Prediction 태스크를 명시적으로 고려한 구조이지만, 위 테이블에서 확인할 수 있듯이 각 태스크 내에서의 세밀한(Detailed) 상호작용 및 연결성에 대한 고려가 여전히 부족합니다.
 
