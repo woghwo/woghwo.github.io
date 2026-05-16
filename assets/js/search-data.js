@@ -58,7 +58,18 @@ ninja.data = [{
               handler: () => {
                 window.location.href = "/blog/";
               },
-            },{id: "books-the-godfather",
+            },{id: "post-uniad",
+        
+          title: "UniAD",
+        
+        description: "Planning-oriented Autonomous Driving",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2026/first-paper-review/";
+          
+        },
+      },{id: "books-the-godfather",
           title: 'The Godfather',
           description: "",
           section: "Books",handler: () => {
