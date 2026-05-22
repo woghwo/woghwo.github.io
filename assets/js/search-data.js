@@ -58,7 +58,18 @@ ninja.data = [{
               handler: () => {
                 window.location.href = "/blog/";
               },
-            },{id: "post-uniad",
+            },{id: "post-sparsedrive",
+        
+          title: "SparseDrive",
+        
+        description: "End-to-End Autonomous Driving via Sparse Scene Representation",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2026/SparseDrive/";
+          
+        },
+      },{id: "post-uniad",
         
           title: "UniAD",
         
