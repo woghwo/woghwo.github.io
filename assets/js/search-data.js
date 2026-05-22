@@ -101,6 +101,11 @@ ninja.data = [{
           description: "데이터 불균형 해결부터 기하학적 거리 계산 알고리즘을 통한 주행 위험도 분류 시스템 구축",
           section: "Projects",handler: () => {
               window.location.href = "/projects/1_project/";
+            },},{id: "projects-엣지-ai-경량화-기반-pm-실시간-탐지-시스템",
+          title: '엣지 AI 경량화 기반 PM 실시간 탐지 시스템',
+          description: "모델 최적화 및 후처리 경량화 파이프라인(Pruning &amp; Quantization) 설계 및 실험",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/edge_ai_pm_detection/";
             },},{id: "teachings-data-science-fundamentals",
           title: 'Data Science Fundamentals',
           description: "This course covers the foundational aspects of data science, including data collection, cleaning, analysis, and visualization. Students will learn practical skills for working with real-world datasets.",
