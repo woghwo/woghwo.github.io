@@ -106,6 +106,11 @@ ninja.data = [{
           description: "모델 최적화 및 후처리 경량화 파이프라인(Pruning &amp; Quantization) 설계 및 실험",
           section: "Projects",handler: () => {
               window.location.href = "/projects/edge_ai_pm_detection/";
+            },},{id: "projects-예측-불확실성-기반-비등방성-안전-마진을-활용한-강건한-엔드투엔드-모션-플래닝",
+          title: '예측 불확실성 기반 비등방성 안전 마진을 활용한 강건한 엔드투엔드 모션 플래닝',
+          description: "SparseDrive를 baseline으로 하여 비등방성 안전 마진을 적용한 모션 플래닝 연구",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/sparse_drive_robust_planning/";
             },},{id: "teachings-data-science-fundamentals",
           title: 'Data Science Fundamentals',
           description: "This course covers the foundational aspects of data science, including data collection, cleaning, analysis, and visualization. Students will learn practical skills for working with real-world datasets.",
