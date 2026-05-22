@@ -96,20 +96,12 @@ cv:
           - "Men of the year 2014 by Time magazine"
 
     Awards:
-      - title: Nobel Prize in Physics
-        authors:
-          - "Royal Swedish Academy of Sciences"
-        date: 1921-11-01
-        awarder: Royal Swedish Academy of Sciences
-        url: https://www.nobelprize.org/prizes/physics/1921/einstein/biographical/
-        summary: The Nobel Prizes are five separate prizes that, according to Alfred Nobel's will of 1895, are awarded to 'those who, during the preceding year, have conferred the greatest benefit to humankind.'
-
-      - title: Max Planck Medal
-        authors:
-          - "German Physical Society"
-        date: 2029
-        awarder: German Physical Society
-        summary: Awarded for outstanding scientific achievement
+      - title: CUAI 중앙대학교 인공지능학회 하계 컨퍼런스 우수상
+        date: 2025
+        awarder: 중앙대학교 인공지능학회
+      - title: CAU LINC3.0 캡스톤디자인 경진대회 소프트웨어형 장려상
+        date: 2024-2
+        awarder: CAU
 
     Publications:
       - title: Zur Elektrodynamik bewegter Körper

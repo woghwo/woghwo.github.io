@@ -2,7 +2,7 @@
 layout: page
 title: "엣지 AI 경량화 기반 PM 실시간 탐지 시스템"
 description: "모델 최적화 및 후처리 경량화 파이프라인(Pruning & Quantization) 설계 및 실험"
-img: assets\img\edge_ai_poster.png
+img: assets/img/edge_ai_poster.png
 importance: 1
 category: work
 ---
