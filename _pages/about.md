@@ -32,6 +32,8 @@ latest_posts:
   }
 </style>
 
+<br/>
+<br/>
 Hi! I am JaeHo Song. I am majoring in Software at Chung-Ang University.
 
 My research interests lie in Autonomous Driving, with a particular focus on Perception and End-to-End (E2E) systems.
