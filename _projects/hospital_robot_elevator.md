@@ -3,6 +3,7 @@ layout: page
 title: "병원용 자율주행 로봇의 다층 이동을 위한 엘리베이터 승하차 및 경로 제어 시스템"
 description: "엘리베이터 승하차 알고리즘 설계 및 CSV 기반 경로 추종 로직 최적화"
 img: assets/img/hospital_robot.png
+github: https://github.com/woghwo/sesac_final
 importance: 2
 category: work
 ---
@@ -13,8 +14,7 @@ category: work
 - **솔루션**: 층간 이동이 가능한 자율주행 로봇을 도입하여 다층 구역 순찰 및 환자 상태(낙상 등) 실시간 모니터링을 수행한다.
 - **핵심 도전 과제**: 엘리베이터 내부의 좁은 공간 및 센서 노이즈 환경에서 안정적인 승하차와 복귀 경로 좌표 정합을 달성하고자 했다.
 
-
-GitHub: https://github.com/woghwo/sesac_final
+* **GitHub:** [https://github.com/woghwo/sesac_final](https://github.com/woghwo/sesac_final)
 
 ---
 
