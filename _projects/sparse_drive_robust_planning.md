@@ -31,5 +31,5 @@ SparseDrive 기반의 엔드투엔드 모션 플래닝은 고성능을 제공하
 - **경로 효율성**: baseline과 유사한 L2 error
 
 ## 관련 자료
-- **PDF 논문**: [전체 논문 보기](assets\pdf\uncertainty_sparsedrive.pdf)
+- **PDF 논문**: [전체 논문 보기](/assets/pdf/uncertainty_sparsedrive.pdf)
 

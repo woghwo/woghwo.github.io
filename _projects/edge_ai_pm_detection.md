@@ -35,7 +35,7 @@ category: work
 - 라즈베리파이 4B에서 30 FPS 실시간 탐지 달성
 
 ## 관련 자료
-- **PDF 문서**: [프로젝트 상세 보고서 보기](assets\pdf\edge_ai.pdf)
+- **PDF 문서**: [프로젝트 상세 보고서 보기](/assets/pdf/edge_ai.pdf)
 
 
 
