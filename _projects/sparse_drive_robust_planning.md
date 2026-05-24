@@ -7,16 +7,20 @@ importance: 1
 category: work
 ---
 
-## 프로젝트 개요
-
 <br/>
 
-### 배경
+## 배경
 SparseDrive 기반의 엔드투엔드 모션 플래닝은 고성능을 제공하지만, 복잡한 도시 환경에서 예측 불확실성으로 인한 위험 상황을 충분히 고려하지 못한다는 한계가 있다. 비등방성(Anisotropic) 안전 마진을 도입해 불확실성을 정량화하고, 안전성을 강화한 플래닝 방법을 제안한다.
 
 <br/>
 
-### 목표
+## 관련 자료
+- **PDF 논문**: [전체 논문 보기](/assets/pdf/uncertainty_sparsedrive.pdf)
+
+
+<br/>
+
+## 목표
 - **예측 불확실성**을 정량화하여 비등방성 안전 마진을 계산
 - **SparseDrive**를 baseline으로 사용해 기존 플래닝과 비교
 - 실험을 통해 충돌 감소율 및 경로 효율성 향상 입증
@@ -41,6 +45,4 @@ SparseDrive 기반의 엔드투엔드 모션 플래닝은 고성능을 제공하
 
 <br/>
 
-## 관련 자료
-- **PDF 논문**: [전체 논문 보기](/assets/pdf/uncertainty_sparsedrive.pdf)
 
