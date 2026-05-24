@@ -2,10 +2,11 @@ cv:
   name: 송재호
   email: aji0927@cau.ac.kr
   summary: "Write your biography here. Tell the world about yourself."
-  awards:
-    - title: CUAI 중앙대학교 인공지능학회 하계 컨퍼런스 우수상
-      date: 2025-08
-      awarder: 중앙대학교 인공지능학회
-    - title: CAU LINC3.0 캡스톤디자인 경진대회 소프트웨어형 장려상
-      date: 2024-02
-      awarder: CAU
+  sections:
+    Awards:
+      - title: CUAI 중앙대학교 인공지능학회 하계 컨퍼런스 우수상
+        date: 2025-08
+        awarder: 중앙대학교 인공지능학회
+      - title: CAU LINC3.0 캡스톤디자인 경진대회 소프트웨어형 장려상
+        date: 2024-02
+        awarder: CAU
