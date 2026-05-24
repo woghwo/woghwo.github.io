@@ -85,18 +85,7 @@ ninja.data = [{
           description: "",
           section: "Books",handler: () => {
               window.location.href = "/books/the_godfather/";
-            },},{id: "news-a-simple-inline-announcement",
-          title: 'A simple inline announcement.',
-          description: "",
-          section: "News",},{id: "news-a-long-announcement-with-details",
-          title: 'A long announcement with details',
-          description: "",
-          section: "News",handler: () => {
-              window.location.href = "/news/announcement_2/";
-            },},{id: "news-a-simple-inline-announcement-with-markdown-emoji-sparkles-smile",
-          title: 'A simple inline announcement with Markdown emoji! :sparkles: :smile:',
-          description: "",
-          section: "News",},{id: "projects-실시간-객체-탐지-및-거리-기반-위험도-평가-시스템-adas-개발",
+            },},{id: "projects-실시간-객체-탐지-및-거리-기반-위험도-평가-시스템-adas-개발",
           title: '실시간 객체 탐지 및 거리 기반 위험도 평가 시스템 (ADAS) 개발',
           description: "데이터 불균형 해결부터 기하학적 거리 계산 알고리즘을 통한 주행 위험도 분류 시스템 구축",
           section: "Projects",handler: () => {
