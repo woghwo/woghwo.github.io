@@ -106,6 +106,11 @@ ninja.data = [{
           description: "모델 최적화 및 후처리 경량화 파이프라인(Pruning &amp; Quantization) 설계 및 실험",
           section: "Projects",handler: () => {
               window.location.href = "/projects/edge_ai_pm_detection/";
+            },},{id: "projects-병원용-자율주행-로봇의-다층-이동을-위한-엘리베이터-승하차-및-경로-제어-시스템",
+          title: '병원용 자율주행 로봇의 다층 이동을 위한 엘리베이터 승하차 및 경로 제어 시스템',
+          description: "엘리베이터 승하차 알고리즘 설계 및 CSV 기반 경로 추종 로직 최적화",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/hospital_robot_elevator/";
             },},{id: "projects-예측-불확실성-기반-비등방성-안전-마진을-활용한-강건한-엔드투엔드-모션-플래닝",
           title: '예측 불확실성 기반 비등방성 안전 마진을 활용한 강건한 엔드투엔드 모션 플래닝',
           description: "SparseDrive를 baseline으로 하여 비등방성 안전 마진을 적용한 모션 플래닝 연구",
