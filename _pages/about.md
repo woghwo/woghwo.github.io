@@ -26,3 +26,7 @@ latest_posts:
   scrollable: true # adds a vertical scroll bar if there are more than 3 new posts items
   limit: 3 # leave blank to include all the blog posts
 ---
+
+Hi! I am JaeHo Song. I am majoring in Software at Chung-Ang University.
+
+My research interests lie in Autonomous Driving, with a particular focus on Perception and End-to-End (E2E) systems.
