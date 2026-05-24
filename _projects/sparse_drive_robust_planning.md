@@ -2,7 +2,7 @@
 layout: page
 title: "예측 불확실성 기반 비등방성 안전 마진을 활용한 강건한 엔드투엔드 모션 플래닝"
 description: "SparseDrive를 baseline으로 하여 비등방성 안전 마진을 적용한 모션 플래닝 연구"
-img: assets/img/sparse_drive_demo.png
+img: assets/img/sparse_poster.png
 importance: 1
 category: work
 ---
