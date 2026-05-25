@@ -25,19 +25,17 @@ UniAD에서 언급했듯이, Standalone 모델의 한계점은 (1) 정보 손실
 2. **Parallel Motion Planning**
 
 <br/>
-
 이를 통해, 기존 SOTA 모델 대비 training, inference 그리고 performance 측면에서 우수한 성능을 달성했습니다.
 
 <br/>
 
-
 ## 1. Introduction 
-
+<br/>
 UniAD에서 다뤘던 것처럼 기존의 **Standalone 방식**은 다음 두 가지 한계점이 있었습니다.
 
 1. **Information loss** (정보 손실)
 2. **Error accumulation** (오류 누적)
-
+<br/>
 또한, 기존의 **End-to-End 방식**은 아래의 한계점들이 존재합니다.
 
 1. **Performance** (성능)
@@ -45,7 +43,7 @@ UniAD에서 다뤘던 것처럼 기존의 **Standalone 방식**은 다음 두 �
 
 <img src="{{ '/assets/img/sparsedrive_fig1.png' | relative_url }}" class="img-fluid rounded z-depth-1" alt="Comparison on end-to-end paradigm">
 <br/>
-
+<br/>
 이는 주로 아래의 **구조적 한계**에 의해서 발생했습니다. (a)
 
 1. **Straightforward design** (단순한 설계 방식)
@@ -57,6 +55,7 @@ UniAD에서 다뤘던 것처럼 기존의 **Standalone 방식**은 다음 두 �
 
 1. **Ego-agents 간의 상호작용 부재**
 2. **Multi-modal problem** (여러 경로 후보군 존재)
+<br/>
 
 이를 고려하여 본 논문에서는 다음과 같은 구조(b)를 지닌 **SparseDrive**를 제안합니다.
 
