@@ -18,12 +18,13 @@ thumbnail: assets/img/sparsedrive_fig4.png
 UniAD에서 언급했듯이, Standalone 모델의 한계점은 (1) 정보 손실, (2) 오류 누적 이었습니다.
 
 이에 Planning-Oriented한 End-to-Way 방식의 network들이 등장을 했지만, 기존의 방식에는 성능과 효율성 측면에서 한계점이 있습니다.
-
+<br/>
 본 논문에서는 이러한 두 한계점을 극복하기 위해 아래의 두 가지 방식을 포함한 **SparseDrive**를 제안합니다.
 
 1. **Symetric Sparse Perception**
 2. **Parallel Motion Planning**
 
+<br/>
 
 이를 통해, 기존 SOTA 모델 대비 training, inference 그리고 performance 측면에서 우수한 성능을 달성했습니다.
 
