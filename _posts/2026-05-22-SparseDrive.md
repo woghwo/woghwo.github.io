@@ -57,6 +57,7 @@ UniAD에서 다뤘던 것처럼 기존의 **Standalone 방식**은 다음 두 �
 2. **Multi-modal problem** (여러 경로 후보군 존재)
 <br/>
 
+
 이를 고려하여 본 논문에서는 다음과 같은 구조(b)를 지닌 **SparseDrive**를 제안합니다.
 
 1. **Symmetric Sparse Perception**
@@ -67,18 +68,162 @@ UniAD에서 다뤘던 것처럼 기존의 **Standalone 방식**은 다음 두 �
 
 
 
-## 2. Methodology 
+## 2. Related Work
 
-논문에서 제시한 해결 방법이나 모델 구조 등을 작성합니다.
+### 2.1 Multi-view 3D Detection (멀티뷰 3D 검출)
+
+* **목적**: 여러 카메라 이미지에서 3차원 객체(차량, 보행자 등)를 안전하게 검출하는 것이 자율주행의 기초.
+* **주요 접근**:
+  * **LSS 계열**: 이미지를 depth(깊이) 추정으로 3D로 올리고 BEV(Bird’s-Eye View) 평면으로 투사하는 "lift-splat" 방식.
+  * **BEV queries 방식**: BEV 상의 쿼리(토큰)를 다시 투영해 이미지에서 피쳐를 샘플링.
+  * **BEV-free(희소·쿼리 기반) 방식**:
+    * **PETR 계열**: 3D 위치 임베딩과 전역 어텐션으로 뷰 변환을 암묵적으로 학습.
+    * **Sparse4D 계열**: 3D 공간에 명시적인 앵커(anchors)를 두고 이를 이미지로 투영해 지역 피쳐를 모아 반복적으로 앵커를 갱신.
+    
+즉, BEV(밀집 표현)는 성능은 좋지만 비용이 크므로, 최근엔 쿼리·희소 앵커 기반으로 효율성·성능을 개선하려는 흐름이 있습니다.
 
 <br/>
 
-## 3. Results (결과)
+### 2.2 End-to-End Tracking (엔드투엔드 다중 객체 추적)
+
+* **전통적 방식**: tracking-by-detection — 먼저 검출하고, 후처리(데이터 연관)를 통해 추적 ID를 연결. 이 방식은 신경망의 능력을 온전히 활용하지 못함.
+* **새로운 아이디어**: object queries를 차용해 'track queries'로 스트리밍 방식으로 인스턴스를 모델링. (MOTR 등)
+* **문제점 및 발전**: 일부 방법은 tracklet-aware label assignment로 검출과 연관 간 충돌이 생김. Sparse4Dv3는 시간적으로 전파된 인스턴스 자체가 ID 일관성을 갖는다는 점을 보여 간단한 ID 할당으로도 SOTA 성능 달성.
+
+<br/>
+
+### 2.3 Online Mapping (온라인 맵 생성)
+
+* **배경**: HD 맵(full high-definition map)은 만들기 비용이 매우 높아, 실시간으로 주변 환경 벡터화(map elements)를 생성하려는 연구가 활발.
+* **대표적 방법**:
+  * **HDMapNet**: BEV 세그멘테이션 + 후처리로 벡터화.
+  * **VectorMapNet**: 오토리그레시브 트랜스포머 기반.
+  * **MapTR**: 맵 요소를 점(point) 집합의 순열 동치성으로 모델링해 정의의 모호성 제거.
+  * **기타**: BeMapNet, StreamMapNet 등은 베지어 곡선이나 시계열(temporal) 퓨전, 쿼리 전파로 향상시킴.
+
+즉, 온라인 맵핑은 다양한 표현과 시계열 처리를 통해 HD 맵을 대체하려는 시도들이 있습니다.
+
+<br/>
+
+### 2.4 End-to-End Motion Prediction (엔드투엔드 모션 예측)
+
+* **목적**: 전통 파이프라인에서 발생하는 누적 오류를 줄이고자, 감지·추적 등과 통합된 단일 모델에서 미래 궤적을 예측.
+* **대표적 접근**:
+  * **FaF**: 단일 CNN으로 현재·미래 바운딩박스 예측.
+  * **IntentNet**: 고수준 행동(intent)과 장기 궤적을 함께 추론.
+  * **PnPNet**: 온라인 트래킹을 포함해 궤적 수준의 피쳐 집계.
+  * **ViP3D, PIP**: 에이전트 쿼리, 혹은 로컬 벡터맵으로 HD 맵을 대체.
+* **핵심**: 예측도 단일 모델에 통합하면 안정성과 효율성 면에서 장점이 있음.
+
+<br/>
+
+### 2.5 End-to-End Planning (엔드투엔드 주행 계획)
+
+* **역사**: 초기부터 엔드투엔드 주행 연구 존재(예: ALVINN). 초기 접근은 중간단계(감지·예측)를 생략해 해석성 부족.
+* **중간 접근**: 일부 연구는 명시적 cost map을 만들어 해석성을 확보하면서도 수작 규칙에 의존.
+* **최신 연구**: UniAD(통합 쿼리 디자인)·VAD(벡터화 표현)·GraphAD(그래프 기반 상호작용)·FusionAD(다중 센서) 등은 장면 학습을 중점적으로 다루지만, 이들 대부분은 장면(인식) 학습에 치중하고, 모션 예측과 계획을 단순하게 처리하는 경향이 있어 두 작업의 유사성(상호작용 고려, 에고(ego) 정보 필요성, 다중 모달성 등)을 충분히 활용하지 못함.
+* **SparseDrive의 포인트**: 예측(prediction)과 계획(planning)의 유사성을 적극 반영해 병렬 설계와 충돌 인식 재점수화(collision-aware rescore)를 제안함.
+
+<br/>
+
+## 3. Methodology 
+
+<br/>
+
+### 3.1 Overview
+
+<br/>
+<img src="{{ '/assets/img/sparsedrive_fig2.png' | relative_url }}" class="img-fluid rounded z-depth-1" alt="SparseDrive Overview">
+<br/>
+
+전체 구조는 위 그림과 같으며, 데이터 처리 흐름은 다음과 같은 단계로 진행됩니다:
+
+1. **Feature Extraction**: 입력된 Multi-view 이미지가 **Image Encoder**를 거쳐 multi-view, multi-scale의 **Image Feature Map ($I$)**으로 변환됩니다.
+2. **Symmetric Sparse Perception**: 앞서 추출된 Feature Map ($I$)은 두 갈래로 나뉘어, 주변 에이전트(Surrounding Agents)와 맵 요소(Map Elements)를 각각 탐지합니다.
+3. **Parallel Motion Planner**: 인식된 에이전트 및 맵 정보는 최종적으로 **Parallel Motion Planner**로 전달되어 자율주행 차량(Ego)의 최적 궤적(Trajectory)을 결정합니다.
+
+<br/>
+
+### 3.2 Symmetric Sparse Perception 
+
+<br/>
+<img src="{{ '/assets/img/sparsedrive_fig3.png' | relative_url }}" class="img-fluid rounded z-depth-1" alt="Symmetric Sparse Perception">
+<br/>
+
+위 그림에서 볼 수 있듯이, 주변 에이전트(Agents)와 맵(Map)에 대한 탐지는 **대칭적인(Symmetric) 동일한 구조**로 처리됩니다. 각 모듈의 세부적인 작동 방식은 다음과 같습니다.
+
+#### 1) Sparse Detection
+
+주변 에이전트는 다음 두 가지 요소로 표현됩니다:
+* **$F_d \in \mathbb{R}^{N_d \times C}$** : 인스턴스 피처 (Instance Feature)
+* **$B_d \in \mathbb{R}^{N_d \times 11}$** : 앵커 박스 (Anchor Box)
+  *(여기서 $N_d$는 앵커 박스의 개수, $C$는 피처의 차원을 의미합니다.)*
+
+각 앵커 박스($B_d$)는 다음 11개의 파라미터로 구성됩니다:
+\[
+\{x, y, z, \ln w, \ln h, \ln l, \sin yaw, \cos yaw, v_x, v_y, v_z\}
+\]
+
+Fig 3의 구조를 살펴보면, 각 브랜치(Branch)는 **두 종류의 디코더(Decoder)**로 구성되어 있습니다:
+* **Temporal Decoder**: $(n-1)$개 
+* **Non-temporal Decoder**: $1$개
+
+모든 디코더는 공통적으로 다음과 같은 입출력을 가집니다:
+* **입력 (Input)**: Feature Maps ($I$), Anchor Boxes ($B_d$), Instance Features ($F_d$)
+* **출력 (Output)**: Updated Instance Features, Refined Anchor Boxes
+
+<br/>
+
+**[Non-temporal Decoder]**
+
+공통적으로 사용되는 Non-temporal Decoder는 다음 **3가지 핵심 모듈**로 구성됩니다:
+1. Deformable Aggregation
+2. FFN (FeedForward Network)
+3. Refinement & Classification
+
+<br/>
+<img src="{{ '/assets/img/sparsedrive_add.png' | relative_url }}" class="img-fluid rounded z-depth-1" alt="Non-temporal Decoder 구조">
+<br/>
+
+이 디코더의 가장 큰 특징은 **랜덤하게 초기화된(Randomly Initialized) 인스턴스**를 입력으로 사용한다는 점입니다.
+
+<br/>
+
+**[Temporal Decoder]**
+
+반면, Temporal Decoder는 **이전 디코더의 결과값을 입력**으로 사용하며, 앞선 구조에 **Multi-Head Attention**이 추가된 형태입니다:
+1. **Cross Attention**: 이전 프레임(Previous Frame)과 현재 프레임(Current Frame)의 인스턴스 간 어텐션을 수행합니다.
+2. **Self Attention**: 현재 프레임 내 인스턴스들 간의 어텐션을 수행합니다.
+
+<br/>
+
+#### 2) Sparse Online Mapping
+
+맵 요소에 대한 인스턴스 정의는 다음과 같이 이루어집니다:
+* **$F_m \in \mathbb{R}^{N_m \times C}$** : 인스턴스 피처 (Instance Feature)
+* **$L_m \in \mathbb{R}^{N_m \times N_p \times 2}$** : 앵커 폴리라인 (Anchor Polyline)
+  *(여기서 $N_m$은 앵커 폴리라인의 개수, $N_p$는 폴리라인을 구성하는 점의 개수입니다.)*
+
+각 앵커 폴리라인($L_m$)은 다음과 같은 점들의 집합으로 구성됩니다:
+\[
+\{x_0, y_0, x_1, y_1, \ldots, x_{N_p - 1}, y_{N_p - 1}\}
+\]
+
+이러한 형태적 차이를 제외한 나머지 작동 원리는 앞서 설명한 Sparse Detection과 동일합니다.
+
+<br/>
+
+#### 3) Sparse Tracking
+
+앞선 과정에서 산출된 **Detection Confidence**가 특정 임계값(Threshold)을 넘어서면 이를 유효한 타겟으로 간주하고, 고유 ID를 부여하여 **추적(Tracking)**을 시작합니다. 
+
+
+## 4. Results (결과)
 
 실험 결과 및 기존 모델과의 성능 비교 등을 작성합니다.
 
 <br/>
 
-## 4. Conclusion (결론 및 배운 점)
+## 5. Conclusion (결론 및 배운 점)
 
 이 논문을 읽고 느낀 점이나 추후 연구 방향 등을 작성합니다.
