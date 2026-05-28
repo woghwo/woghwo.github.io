@@ -90,9 +90,9 @@ ninja.data = [{
           description: "데이터 불균형 해결부터 기하학적 거리 계산 알고리즘을 통한 주행 위험도 분류 시스템 구축",
           section: "Projects",handler: () => {
               window.location.href = "/projects/1_project/";
-            },},{id: "projects-엣지-ai-경량화-기반-pm-실시간-탐지-시스템",
-          title: '엣지 AI 경량화 기반 PM 실시간 탐지 시스템',
-          description: "모델 최적화 및 후처리 경량화 파이프라인(Pruning &amp; Quantization) 설계 및 실험",
+            },},{id: "projects-엣지-ai-환경을-위한-yolo-기반-pm-탐지-경량화-모델-연구",
+          title: '엣지 AI 환경을 위한 YOLO 기반 PM 탐지 경량화 모델 연구',
+          description: "YOLO 아키텍처 재설계 및 후처리 최적화(Pruning &amp; Quantization)를 통한 PM 탐지 모델 경량화 연구",
           section: "Projects",handler: () => {
               window.location.href = "/projects/edge_ai_pm_detection/";
             },},{id: "projects-병원용-자율주행-로봇의-다층-이동을-위한-엘리베이터-승하차-및-경로-제어-시스템",
