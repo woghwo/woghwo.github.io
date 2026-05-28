@@ -8,7 +8,15 @@ importance: 2
 category: work
 ---
 
+<br/>
 
+<div class="row justify-content-center">
+    <div class="col-sm-8 mt-3 mt-md-0">
+        {% include figure.liquid loading="eager" path="assets/img/hospital_robot.png" title="Project Demo" class="img-fluid rounded z-depth-1" %}
+    </div>
+</div>
+
+<br/>
 ## 배경 및 목적
 - **문제 정의**: 병원 내 의료진의 단순 반복 업무(물품 운반 등) 과부하 및 대면 접촉으로 인한 감염 위험이 존재했다.
 - **솔루션**: 층간 이동이 가능한 자율주행 로봇을 도입하여 다층 구역 순찰 및 환자 상태(낙상 등) 실시간 모니터링을 수행한다.

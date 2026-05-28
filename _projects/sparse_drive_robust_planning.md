@@ -9,6 +9,14 @@ category: work
 
 <br/>
 
+<div class="row justify-content-center">
+    <div class="col-sm-8 mt-3 mt-md-0">
+        {% include figure.liquid loading="eager" path="assets/img/sparse_poster.png" title="Project Poster" class="img-fluid rounded z-depth-1" %}
+    </div>
+</div>
+
+<br/>
+
 ## 관련 자료
 - **PDF 논문**: [전체 논문 보기](/assets/pdf/uncertainty_sparsedrive.pdf)
 

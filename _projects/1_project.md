@@ -9,7 +9,11 @@ category: work
 
 <br/>
 
-{% include figure.liquid loading="eager" path="assets/img/proj1_demo.png" title="Project Demo" class="img-fluid rounded z-depth-1" %}
+<div class="row justify-content-center">
+    <div class="col-sm-8 mt-3 mt-md-0">
+        {% include figure.liquid loading="eager" path="assets/img/proj1_demo.png" title="Project Demo" class="img-fluid rounded z-depth-1" %}
+    </div>
+</div>
 
 <br/>
 ## 프로젝트 개요

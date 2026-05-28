@@ -9,6 +9,14 @@ category: work
 
 <br/>
 
+<div class="row justify-content-center">
+    <div class="col-sm-8 mt-3 mt-md-0">
+        {% include figure.liquid loading="eager" path="assets/img/edge_ai_poster.png" title="Project Poster" class="img-fluid rounded z-depth-1" %}
+    </div>
+</div>
+
+<br/>
+
 ## 관련 자료
 - **PDF 문서**: [프로젝트 상세 보고서 보기](/assets/pdf/edge_ai.pdf)
 
