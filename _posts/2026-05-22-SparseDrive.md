@@ -219,6 +219,79 @@ Fig 3의 구조를 살펴보면, 각 브랜치(Branch)는 **두 종류의 디코
 앞선 과정에서 산출된 **Detection Confidence**가 특정 임계값(Threshold)을 넘어서면 이를 유효한 타겟으로 간주하고, 고유 ID를 부여하여 **추적(Tracking)**을 시작합니다. 
 
 
+<br/>
+
+### 3.3 Parallel Motion Planner
+
+<br/>
+<img src="{{ '/assets/img/sparsedrive_fig4.png' | relative_url }}" class="img-fluid rounded z-depth-1" alt="Parallel Motion Planner">
+<br/>
+
+**Parallel Motion Planner**는 크게 다음의 세 가지 과정으로 구성됩니다.
+
+<br/>
+
+#### 1) Ego Instance Initialization
+
+이전의 주변 에이전트(Agents)에서 정의된 것과 유사하게, Ego 인스턴스 역시 다음과 같이 정의됩니다:
+
+* **$F_e \in \mathbb{R}^{1 \times C}$** : Ego 인스턴스 피처 (Ego Instance Feature)
+* **$B_e \in \mathbb{R}^{1 \times 11}$** : Ego 앵커 박스 (Ego Anchor Box)
+
+기존의 방식에서는 Ego 피처를 랜덤(Random)하게 초기화했습니다. 하지만 이러한 방법은 의미론적(Semantic)이거나 기하학적(Geometric)인 정보를 얻기 어렵다는 단점이 존재합니다.
+
+\[
+F_e = \operatorname{AveragePool}(I_{\text{front}}, S)
+\]
+
+따라서 본 논문에서는 Perception 단계에서 얻은 이미지 피처 맵($I$) 중 **전면 카메라(Front Camera)의 가장 작은 스케일(Scale)의 피처 맵**을 사용하여 Ego 피처를 초기화합니다. *(실제 카메라 이미지 상에서는 Ego 차량이 보이지 않기 때문에 이와 같은 풀링(Pooling) 방식을 사용합니다.)*
+
+앵커 박스($B_e$)의 경우 위치(Location), 크기(Dimension), 요 각도(Yaw angle)는 알 수 있지만, 속도(Velocity)는 알 수 없습니다. 이를 해결하기 위해 **$ES_T$라는 보조 태스크(Auxiliary Task)**를 추가해 속도를 디코딩(Decode)하며, 이전 프레임의 결과값을 현재 프레임의 초기화 값으로 활용합니다.
+
+<br/>
+
+#### 2) Spatial-Temporal Interaction
+
+먼저 모든 에이전트 간의 상호작용(Interaction)을 모델링하기 위해, Ego 차량과 주변 에이전트를 합쳐 다음과 같이 **에이전트 수준의 인스턴스(Agent-level Instance)**로 정의합니다:
+
+\[
+F_a = \operatorname{Concat}(F_d, F_e), \quad B_a = \operatorname{Concat}(B_d, B_e)
+\]
+
+Ego 인스턴스를 처음 초기화할 때는 시간적(Temporal) 정보가 고려되지 않았으므로, 시간적 모델링을 위해 **$(N_d + 1) \times H$** 크기의 인스턴스 메모리 큐(Instance Memory Queue)를 사용합니다. *(여기서 $H$는 저장된 프레임 수를 의미합니다.)*
+
+이후 공간적-시간적 문맥(Spatial-Temporal Context)을 얻기 위해 다음 **3가지 상호작용(Interaction)**을 수행합니다:
+
+1. **Agent-Temporal Cross-Attention**: 에이전트와 시간 프레임 간의 어텐션
+2. **Agent Self-Attention**: 현재 에이전트들 간의 어텐션
+3. **Agent-Map Cross-Attention**: 에이전트와 맵 요소 간의 어텐션
+
+여기서 사용되는 Temporal Cross-Attention은 앞선 Sparse Perception의 Scene-level Interaction(모든 시간적 프레임의 인스턴스와 현재 프레임 인스턴스 간의 상호작용)과 달리, **각 인스턴스 간의 상호작용만을 수행하는 Instance-level Interaction**이라는 점이 특징입니다.
+
+이를 통해 각 에이전트(주변 차량 및 Ego 차량)에 대해 모션 예측(Motion Prediction)과 주행 계획(Planning)을 위한 궤적과 점수(Score)를 다음과 같이 산출합니다:
+* **모션 예측 (Motion Prediction)**: 
+  * 궤적: $\tau_m \in \mathbb{R}^{N_d \times K_m \times T_m \times 2}$
+  * 점수: $s_m \in \mathbb{R}^{N_d \times K_m}$
+* **주행 계획 (Planning)**: 
+  * 궤적: $\tau_p \in \mathbb{R}^{N_{cmd} \times K_p \times T_p \times 2}$
+  * 점수: $s_p \in \mathbb{R}^{N_{cmd} \times K_p}$
+
+*(여기서 $K_m, K_p$는 각각 모션 예측과 주행 계획을 위한 궤적 후보(Modes)의 수이며, $T_m, T_p$는 예측 및 계획할 미래의 타임스텝 수입니다. $N_{cmd}$는 주행 명령(Turn left, Turn right, Go straight 등 3가지)의 수를 의미합니다.)*
+
+<br/>
+
+#### 3) Hierarchical Planning Selection
+
+앞서 얻은 멀티 모달(Multi-modal) 형태의 여러 주행 계획 궤적 중에서, **상위 수준 명령(High-level Command, $cmd$)에 해당하는 궤적**만 우선적으로 선택합니다:
+\[
+\tau_{p,cmd} \in \mathbb{R}^{K_p \times T_p \times 2}
+\]
+
+이후, **충돌 인지 재점수화 모듈(Collision-aware Rescore Module)**을 통해 모션 예측 단계에서 얻은 다른 에이전트들의 궤적($\tau_m$)과 선택된 Ego 궤적($\tau_{p,cmd}$) 사이의 충돌 여부를 판단하여, 최종적으로 가장 안전하고 최적화된 궤적을 선택하게 됩니다.
+
+
+
+
 ## 4. Results (결과)
 
 실험 결과 및 기존 모델과의 성능 비교 등을 작성합니다.
