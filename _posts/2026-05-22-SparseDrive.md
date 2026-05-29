@@ -233,7 +233,7 @@ Fig 3의 구조를 살펴보면, 각 브랜치(Branch)는 **두 종류의 디코
 
 #### 1) Ego Instance Initialization
 
-이전의 주변 에이전트(Agents)에서 정의된 것과 유사하게, Ego 인스턴스 역시 다음과 같이 정의됩니다:
+이전의 주변 에이전트(Agents)에서 정의된 것과 유사하게, Ego 인스턴스 역시 다음과 같이 정의됩니다
 
 * **$F_e \in \mathbb{R}^{1 \times C}$** : Ego 인스턴스 피처 (Ego Instance Feature)
 * **$B_e \in \mathbb{R}^{1 \times 11}$** : Ego 앵커 박스 (Ego Anchor Box)
@@ -252,7 +252,7 @@ F_e = \operatorname{AveragePool}(I_{\text{front}}, S)
 
 #### 2) Spatial-Temporal Interaction
 
-먼저 모든 에이전트 간의 상호작용(Interaction)을 모델링하기 위해, Ego 차량과 주변 에이전트를 합쳐 다음과 같이 **에이전트 수준의 인스턴스(Agent-level Instance)**로 정의합니다:
+먼저 모든 에이전트 간의 상호작용(Interaction)을 모델링하기 위해, Ego 차량과 주변 에이전트를 합쳐 다음과 같이 **에이전트 수준의 인스턴스(Agent-level Instance)**로 정의합니다
 
 \[
 F_a = \operatorname{Concat}(F_d, F_e), \quad B_a = \operatorname{Concat}(B_d, B_e)
