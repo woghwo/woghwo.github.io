@@ -161,9 +161,9 @@ UniAD에서 다뤘던 것처럼 기존의 **Standalone 방식**은 다음 두 �
   *(여기서 $N_d$는 앵커 박스의 개수, $C$는 피처의 차원을 의미합니다.)*
 
 각 앵커 박스($B_d$)는 다음 11개의 파라미터로 구성됩니다:
-\[
+$$
 \{x, y, z, \ln w, \ln h, \ln l, \sin yaw, \cos yaw, v_x, v_y, v_z\}
-\]
+$$
 
 Fig 3의 구조를 살펴보면, 각 브랜치(Branch)는 **두 종류의 디코더(Decoder)**로 구성되어 있습니다:
 * **Temporal Decoder**: $(n-1)$개 
@@ -206,9 +206,9 @@ Fig 3의 구조를 살펴보면, 각 브랜치(Branch)는 **두 종류의 디코
   *(여기서 $N_m$은 앵커 폴리라인의 개수, $N_p$는 폴리라인을 구성하는 점의 개수입니다.)*
 
 각 앵커 폴리라인($L_m$)은 다음과 같은 점들의 집합으로 구성됩니다:
-\[
+$$
 \{x_0, y_0, x_1, y_1, \ldots, x_{N_p - 1}, y_{N_p - 1}\}
-\]
+$$
 
 이러한 형태적 차이를 제외한 나머지 작동 원리는 앞서 설명한 Sparse Detection과 동일합니다.
 
@@ -240,9 +240,9 @@ Fig 3의 구조를 살펴보면, 각 브랜치(Branch)는 **두 종류의 디코
 
 기존의 방식에서는 Ego 피처를 랜덤(Random)하게 초기화했습니다. 하지만 이러한 방법은 의미론적(Semantic)이거나 기하학적(Geometric)인 정보를 얻기 어렵다는 단점이 존재합니다.
 
-\[
+$$
 F_e = \operatorname{AveragePool}(I_{\text{front}}, S)
-\]
+$$
 
 따라서 본 논문에서는 Perception 단계에서 얻은 이미지 피처 맵($I$) 중 **전면 카메라(Front Camera)의 가장 작은 스케일(Scale)의 피처 맵**을 사용하여 Ego 피처를 초기화합니다. *(실제 카메라 이미지 상에서는 Ego 차량이 보이지 않기 때문에 이와 같은 풀링(Pooling) 방식을 사용합니다.)*
 
@@ -254,9 +254,9 @@ F_e = \operatorname{AveragePool}(I_{\text{front}}, S)
 
 먼저 모든 에이전트 간의 상호작용(Interaction)을 모델링하기 위해, Ego 차량과 주변 에이전트를 합쳐 다음과 같이 **에이전트 수준의 인스턴스(Agent-level Instance)**로 정의합니다
 
-\[
+$$
 F_a = \operatorname{Concat}(F_d, F_e), \quad B_a = \operatorname{Concat}(B_d, B_e)
-\]
+$$
 
 Ego 인스턴스를 처음 초기화할 때는 시간적(Temporal) 정보가 고려되지 않았으므로, 시간적 모델링을 위해 **$(N_d + 1) \times H$** 크기의 인스턴스 메모리 큐(Instance Memory Queue)를 사용합니다. *(여기서 $H$는 저장된 프레임 수를 의미합니다.)*
 
@@ -283,9 +283,9 @@ Ego 인스턴스를 처음 초기화할 때는 시간적(Temporal) 정보가 고
 #### 3) Hierarchical Planning Selection
 
 앞서 얻은 멀티 모달(Multi-modal) 형태의 여러 주행 계획 궤적 중에서, **상위 수준 명령(High-level Command, $cmd$)에 해당하는 궤적**만 우선적으로 선택합니다:
-\[
+$$
 \tau_{p,cmd} \in \mathbb{R}^{K_p \times T_p \times 2}
-\]
+$$
 
 이후, **충돌 인지 재점수화 모듈(Collision-aware Rescore Module)**을 통해 모션 예측 단계에서 얻은 다른 에이전트들의 궤적($\tau_m$)과 선택된 Ego 궤적($\tau_{p,cmd}$) 사이의 충돌 여부를 판단하여, 최종적으로 가장 안전하고 최적화된 궤적을 선택하게 됩니다.
 
