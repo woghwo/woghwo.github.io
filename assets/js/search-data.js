@@ -58,7 +58,18 @@ ninja.data = [{
               handler: () => {
                 window.location.href = "/blog/";
               },
-            },{id: "post-sparsedrive",
+            },{id: "post-vlm-e2e",
+        
+          title: "VLM-E2E",
+        
+        description: "Enhancing End-to-End Autonomous Driving with Multimodal Driver Attention Fusion",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2026/VLM-E2E/";
+          
+        },
+      },{id: "post-sparsedrive",
         
           title: "SparseDrive",
         
